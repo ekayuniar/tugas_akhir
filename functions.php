@@ -12,3 +12,29 @@ function query($query)
     }
     return $rows;
 }
+
+function tambah($data)
+{
+    global $koneksi;
+    $nama = htmlspecialchars($data["nama"]);
+    $nim = htmlspecialchars($data["nim"]);
+    $email = htmlspecialchars($data["email"]);
+    $jurusan = htmlspecialchars($data["jurusan"]);
+    $gambar = htmlspecialchars($data["gambar"]);
+
+    // query insert ke database
+    $query = "INSERT INTO data_mhs
+     VALUES
+     ('','$nama','$nim','$email','$jurusan','$gambar')
+     ";
+
+    mysqli_query($koneksi, $query);
+    return mysqli_affected_rows($koneksi);
+}
+
+function hapus($id)
+{
+    global $koneksi;
+    mysqli_query($koneksi, "DELETE FROM data_mhs WHERE id = $id");
+    return mysqli_affected_rows($koneksi);
+}
